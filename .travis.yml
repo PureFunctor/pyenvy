@@ -1,0 +1,35 @@
+os: linux
+dist: xenial
+language: python
+
+cache:
+  pip: true
+  directories:
+  - $HOME/.cache/pre-commit
+  - .pytest_cache
+  - .tox
+
+branches:
+  only:
+  - stable
+  - develop
+  - /^feature\./.+$/
+
+matrix:
+  include:
+  - stage: Lint and Test
+    python: 3.8
+    env: TOXENV=lint
+  - python: 3.7
+    env: TOXENV=py37
+  - python: 3.8
+    env: TOXENV=py38
+
+install:
+  - pip install tox coverage
+
+script:
+  - tox
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
