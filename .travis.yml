@@ -13,7 +13,7 @@ branches:
   only:
   - stable
   - develop
-  - /^feature\./.+$/
+  - /^feature\/.+$/
 
 matrix:
   include:
